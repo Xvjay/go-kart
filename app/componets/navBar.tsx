@@ -6,6 +6,7 @@ import BackButton from './buttons/backButton'
 import {Popover, PopoverButton, PopoverPanel, Transition} from '@headlessui/react'
 import {Bars3Icon} from '@heroicons/react/16/solid'
 import { BackspaceIcon } from '@heroicons/react/24/outline'
+import LogoutButton from './buttons/logout'
 
 const NavBar = () => {
     return (
@@ -63,7 +64,7 @@ const NavBar = () => {
             </Transition>
 
             <div className='hidden sm:block'>
-                <BackButton/>
+                <LogoutButton/>
             </div>
         </Popover>
 

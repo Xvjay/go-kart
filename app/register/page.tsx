@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 import RegisterButton from '../componets/buttons/registerButton'
 import BackButton from '../componets/buttons/backButton'
+import Link from 'next/link'
 
 const register = () => {
     const [regUsername,
@@ -16,17 +17,16 @@ const register = () => {
 
             method: 'POST',
             body: JSON.stringify({Name: regUsername, Email: regEmail, Password: regPassword}),
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             }
         })
-     
 
     };
 
     return (
 
-        <body className="bg-blue-200">
+        <div className="bg-blue-200 h-screen">
             <div id='center'>
                 <div id='div1'>
                     <div className='input'>
@@ -57,13 +57,15 @@ const register = () => {
                         <input type='password' placeholder='Re-Enter Password'></input>
                     </ div><br/>
 
-                    <button onClick={handleRegister}>register</button>
+                    <Link href="/">
+                        <button id='button1' onClick={handleRegister}>register</button>
+                    </Link>
                     <br/>
                     <BackButton/>
                 </div>
             </div>
 
-        </body>
+        </div>
 
     )
 }

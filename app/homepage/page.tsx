@@ -3,12 +3,11 @@ import NavBar from '../componets/navBar'
 
 const homePage = () => {
     return (
+        <div className="bg-blue-200 h-screen" >
+                <NavBar/>
 
-        <body className="bg-blue-200">
-            <NavBar/>
+      </div>
 
-
-        </body>
     )
 }
 
