@@ -17,9 +17,9 @@ const NavBar = () => {
             <div className='grow'>
                 <div className='hidden sm:flex items-center justify-center gap-2 md:gap-8'>
 
-                    <Link href='home'>Home</Link>
-                    <Link href='home'>Settings</Link>
-                    <Link href='home'>Home</Link>
+                    <Link href='/homepage'>Home</Link>
+                    <Link href='/settings'>Settings</Link>
+                    <Link href='/board'>LeaderBoard</Link>
 
                 </div>
             </div>
