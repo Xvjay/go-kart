@@ -12,25 +12,25 @@ const Settings = () => {
     const [curPassword,
         setCurPassword] = useState('');
 
-        const change = async() => {
-            const response = await fetch('/api/settings', {
-                method: 'POST',
-                body: JSON.stringify({Name: curUsername, Email: curEmail, Password: curPassword}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-        };
-    
+    const change = async() => {
+        const response = await fetch('/api/settings', {
+            method: 'POST',
+            body: JSON.stringify({Name: curUsername, Email: curEmail, Password: curPassword}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    };
 
     return (
 
-        <div className='bg-blue-200 h-screen'>
+        <div className='bg-blue-200 flex flex-col h-screen'>
             <NavBar/>
-            <div id='center'>
-                <div id='div3'>
-                    <div className='bg-blue-200 flex flex-col justify-evenly h-screen m-12 rounded-lg'>
-                        <div>Change Username
+            <div className='flex m-auto text-center min-h- '>
+                <div className=" bg-[#93c5fd] max-h-full rounded-lg ">
+                    <div
+                        className='bg-blue-200 flex flex-col justify-evenly 	 m-12 rounded-lg max-h-min	'>
+                        <div>Change Username<br/>
 
                             <input
                                 type='text'
@@ -38,7 +38,7 @@ const Settings = () => {
                                 placeholder='Enter new Username'
                                 onChange={e => setCurUsername(e.target.value)}/>
                         </div>
-                        <div>Change Email
+                        <div>Change Email<br/>
                             <input
                                 type="text"
                                 name='Email'
@@ -46,7 +46,7 @@ const Settings = () => {
                                 onChange={e => setCurEmail(e.target.value)}/>
                         </div>
 
-                        <div>Change Password
+                        <div>Change Password<br/>
                             <input
                                 type='password'
                                 name='Password'

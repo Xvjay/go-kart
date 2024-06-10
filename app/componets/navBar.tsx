@@ -5,14 +5,13 @@ import Link from "next/link"
 import BackButton from './buttons/backButton'
 import {Popover, PopoverButton, PopoverPanel, Transition} from '@headlessui/react'
 import {Bars3Icon} from '@heroicons/react/16/solid'
-import { BackspaceIcon } from '@heroicons/react/24/outline'
+import {BackspaceIcon} from '@heroicons/react/24/outline'
 import LogoutButton from './buttons/logout'
 
 const NavBar = () => {
     return (
 
-        <Popover
-            className='container mx-auto flex items-center px-6 py-2 h-24'>
+        <Popover className='container mx-auto flex items-center px-6 py-2 h-24'>
             <h1>GoKart</h1>
             <div className='grow'>
                 <div className='hidden sm:flex items-center justify-center gap-2 md:gap-8'>
@@ -53,9 +52,9 @@ const NavBar = () => {
                             </div>
                             <div className='mt-4 p-3'>
                                 <nav className='grid gap-y-8'>
-                                    <Link href='home'>Home</Link>
-                                    <Link href='home'>Home</Link>
-                                    <Link href='home'>Home</Link>
+                                    <Link href='/homepage'>Home</Link>
+                                    <Link href='/settings'>Settings</Link>
+                                    <Link href='/board'>LeaderBoard</Link>
                                 </nav>
                             </div>
                         </div>
