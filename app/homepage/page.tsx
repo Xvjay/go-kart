@@ -11,13 +11,13 @@ const homePage = () => {
                 <div >
                     <div id='button1'>
 
-                        <Link href=''>
+                        <Link href='/join'>
                             <button>Join Team</button> 
                         </Link>
                     </div> <br/> <br/>
                     <div id='button1'>
 
-                        <Link href=''>
+                        <Link href='/makeTeam'>
                             <button>Make Team</button>
                         </Link>
                     </div>
