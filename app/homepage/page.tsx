@@ -15,12 +15,7 @@ const homePage = () => {
                             <button>Join Team</button> 
                         </Link>
                     </div> <br/> <br/>
-                    <div id='button1'>
-
-                        <Link href='/makeTeam'>
-                            <button>Make Team</button>
-                        </Link>
-                    </div>
+                  
                 </div>
             </div>
 

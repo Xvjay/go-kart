@@ -44,6 +44,4 @@ export async function POST(request: Request) {
     response.headers.set('Set-Cookie', serializedCookie);
 
     return response;
-    // Use redirect function to redirect to /homepage
-    // return redirect('/homepage'); // This line should be removed or commented out
 }
