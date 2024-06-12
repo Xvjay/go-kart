@@ -2,6 +2,7 @@
 
 import React, {useState} from 'react'
 import NavBar from '../componets/navBar'
+import Link from 'next/link';
 
 const Settings = () => {
 
@@ -21,6 +22,14 @@ const Settings = () => {
             }
         })
     };
+
+    const changeCol = async() => {
+     await fetch('/api/settings/settings', {method: 'POST',
+          
+        })
+        
+
+    }
 
     return (
 
@@ -47,16 +56,31 @@ const Settings = () => {
                         </div>
 
                         <div>Change Password<br/>
+
                             <input
                                 type='password'
                                 name='Password'
                                 placeholder='Enter new Password'
                                 onChange={e => setCurPassword(e.target.value)}/><br/>
                             <br/>
+
                             <button id='button1' onClick={change}>
                                 change</button>
 
                         </div>
+                        <br/>
+                        <hr className='bg-stone-950	h-px border-0'></hr>
+
+                        <br/>
+
+                        <div>Change Team</div>
+
+                        <br/>
+                        <Link href='/join '>
+                            <button id="button1" onClick={changeCol}>Change Team</button>
+                        </Link>
+                        <br/>
+                        <br/>
 
                     </div>
                 </div>

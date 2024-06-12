@@ -17,7 +17,7 @@ export async function POST(request: Request) {
         }, { status: 401 });
     }
 
-    const query2 = 'SELECT Email FROM users WHERE Email = ? AND Password = ?';
+    const query2 = 'SELECT Id,Email FROM users WHERE Email = ? AND Password = ?';
     const [rows2]: [any[], any] = await db.execute(query2, [Email, Password]);
 
     if (rows2.length === 0) {

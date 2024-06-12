@@ -1,8 +1,8 @@
 import pool from '@/app/libs/mysql';
-import { serialize } from 'cookie';
-import { NextResponse } from 'next/server';
+import {serialize} from 'cookie';
+import {NextRequest, NextResponse} from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET() {
 
     const db = await pool.getConnection();
     const query = 'SELECT TeamColor FROM teams';
@@ -11,24 +11,50 @@ export async function GET(request: Request) {
     return NextResponse.json(rows)
 }
 
-export async function POST(request: Request){
+export async function POST(request : NextRequest) {
+    const cookieValue = request
+        .cookies
+        .get('user')
+        ?.value;
+    let userId = '';
+    if (cookieValue) {
+        const parsedCookie = JSON.parse(cookieValue);
+        userId = parsedCookie.Id;
+    }
+    console.log(userId);
 
-    const { TeamColor  } = await request.json();
+    const {TeamColor, teamCap} = await request.json();
+    console.log(TeamColor)
+    console.log(teamCap)
     const color = TeamColor;
+    const cap = teamCap;
+
+    if (cap == true) {
+        const query = 'UPDATE teams SET CaptainId = ? WHERE TeamColor = ?';
+
+        const db = await pool.getConnection();
+        const [rows] : [any[], any] = await db.execute(query, [userId, TeamColor]);
+        db.release();
+        console.log("yes cap")
+    }else{
+        console.log("not cap");
+    }
+
     const serializedCookie = serialize('TeamColor', JSON.stringify(color), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        path: '/',
+        path: '/'
     });
 
     const response = NextResponse.json({
         message: "User found"
-    }, { status: 201 });
+    }, {status: 201});
 
-    response.headers.set('Set-Cookie', serializedCookie);
+    response
+        .headers
+        .set('Set-Cookie', serializedCookie);
 
     return response;
-
 
 }

@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import pool from "@/app/libs/mysql";
 import {serialize} from "cookie";
+import { cookies } from "next/headers";
 
 export async function POST(req : NextRequest) {
     const cookieValue = req
@@ -51,7 +52,7 @@ export async function POST(req : NextRequest) {
 
     }
 
-    if (Email !+ "") {
+    if (Email != "") {
         const updatedUser = {
             Email
         };
@@ -78,3 +79,4 @@ export async function POST(req : NextRequest) {
         message: 'hello'
     }, {status: 301});
 }
+
