@@ -64,7 +64,7 @@ const JoinTeam = () => {
                             onClick={() => handleClick(member.TeamColor)}>
 
                             <button>
-                                <Link href="" className="text-white ">
+                                <Link href="/teams" className="text-white ">
                                     {member.TeamColor}
                                 </Link>
                             </button>

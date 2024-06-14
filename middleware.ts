@@ -1,3 +1,4 @@
+import { url } from 'inspector';
 import {NextRequest, NextResponse} from 'next/server';
 
 export function middleware(req : NextRequest) {
@@ -21,8 +22,10 @@ export function middleware(req : NextRequest) {
 
     if (userCookie && currentPath === "/") {
         return NextResponse.redirect(new URL('/homepage', req.url));
-    } else if (teamColor && currentPath === "/join" || teamColor && currentPath === "/homepage" ) {
-        return NextResponse.redirect(new URL('/homepage2', req.url));
+    
+    }else if(!teamColor && currentPath === "/homepage2"){
+        return NextResponse.redirect(new URL('/homepage' , req.url));
+
 
     } else {
         return NextResponse.next();
@@ -30,5 +33,5 @@ export function middleware(req : NextRequest) {
 
 }
 export const config = {
-    matcher: ["/", "/api/login" , "/join" , "/homepage"]
+    matcher: ["/", "/api/login" , "/join" , "/homepage" , "/homepage2"]
 };

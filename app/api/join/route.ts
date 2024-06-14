@@ -1,11 +1,12 @@
 import pool from '@/app/libs/mysql';
 import {serialize} from 'cookie';
+import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
 import {NextRequest, NextResponse} from 'next/server';
 
 export async function GET() {
 
     const db = await pool.getConnection();
-    const query = 'SELECT TeamColor FROM teams';
+    const query = 'select * from teams left join team_subsets on teams.TeamId = team_subsets.Parent_TeamId where teams.TeamId = Parent_TeamId;';
     const [rows] = await db.execute(query)
 
     return NextResponse.json(rows)
@@ -40,7 +41,12 @@ export async function POST(request : NextRequest) {
         console.log("not cap");
     }
 
-    const serializedCookie = serialize('TeamColor', JSON.stringify(color), {
+    const query = "SELECT * from teams WHERE TeamColor = ?";
+    const db = await pool.getConnection();
+
+    const [row] : [any[] , any] = await db.execute(query, [TeamColor])
+
+    const serializedCookie = serialize('TeamColor', JSON.stringify(row), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
