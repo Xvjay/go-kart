@@ -5,7 +5,10 @@ import NavBar from '../componets/navBar'
 import Link from 'next/link';
 
 const SubTeam = () => {
-  const [teamMembers,
+  const [enabled,
+    setEnabled] = useState(false)
+
+const [teamMembers,
     setTeamMembers] = useState < any[] > ([]);
 const [selectedColor,
     setSelectedColor] = useState(null);
@@ -24,6 +27,29 @@ useEffect(() => {
     fetchTeamColors();
 }, []);
 
+const handleClick = (color : any) => {
+    setSelectedColor(color);
+};
+
+useEffect(() => {
+    const saveColor = async() => {
+        if (selectedColor) {
+            const res = await fetch("/api/join/join2", {
+                method: 'POST',
+                body: JSON.stringify({TeamColor: selectedColor, teamCap: enabled}),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include' 
+            });
+            const result = await res.json();
+            console.log(result.message);
+        }
+    };
+
+    saveColor();
+}, [selectedColor]);
+
     return (
         <div className="bg-blue-200 flex flex-col h-screen justify-evenly">
             <NavBar/>
@@ -33,10 +59,11 @@ useEffect(() => {
                     {teamMembers.map((member, index) => (
                         <li
                             key={index}
-                            className="p-4 bg-blue-700 m-2 rounded-lg">
+                            className="p-4 bg-blue-700 m-2 rounded-lg"
+                            onClick={() => handleClick(member.TeamColor)}>
 
                             <button>
-                                <Link href="" className="text-white ">
+                                <Link href="" className="text-white">
                                     {member.TeamColor}
                                 </Link>
                             </button>

@@ -24,10 +24,7 @@ const Settings = () => {
     };
 
     const changeCol = async() => {
-     await fetch('/api/settings/settings', {method: 'POST',
-          
-        })
-        
+        await fetch('/api/settings/settings', {method: 'POST'})
 
     }
 
@@ -64,8 +61,10 @@ const Settings = () => {
                                 onChange={e => setCurPassword(e.target.value)}/><br/>
                             <br/>
 
-                            <button id='button1' onClick={change}>
-                                change</button>
+                            
+                                <button id='button1' onClick={change}>
+                                    Comfirm</button>
+                            
 
                         </div>
                         <br/>
@@ -80,8 +79,18 @@ const Settings = () => {
                             <button id="button1" onClick={changeCol}>Change Team</button>
                         </Link>
                         <br/>
+
+                        <hr className='bg-stone-950	h-px border-0'></hr>
+                        <br/>
+                        <div>Edit/Add Teams</div>
+
                         <br/>
 
+                        <Link href='/makeTeam'>
+                            <button id="button1" onClick={changeCol}>Edit/Add Team</button>
+                        </Link>
+
+                        <br/>
                     </div>
                 </div>
             </div>

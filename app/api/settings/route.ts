@@ -74,6 +74,8 @@ export async function POST(req : NextRequest) {
         return response
 
     }
+    db.release();
+
 
     return NextResponse.json({
         message: 'hello'

@@ -41,7 +41,7 @@ const JoinTeam = () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    credentials: 'include' // Ensures cookies are included in requests
+                    credentials: 'include' 
                 });
                 const result = await res.json();
                 console.log(result.message);

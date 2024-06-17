@@ -1,12 +1,13 @@
 import pool from '@/app/libs/mysql';
 import {serialize} from 'cookie';
-import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
+import {DevBundlerService} from 'next/dist/server/lib/dev-bundler-service';
 import {NextRequest, NextResponse} from 'next/server';
 
 export async function GET() {
 
     const db = await pool.getConnection();
-    const query = 'select * from teams left join team_subsets on teams.TeamId = team_subsets.Parent_TeamId where teams.TeamId = Parent_TeamId;';
+    const query = 'select * from teams left join team_subsets on teams.TeamId = team_subsets.Parent' +
+            '_TeamId where teams.TeamId = Parent_TeamId;';
     const [rows] = await db.execute(query)
 
     return NextResponse.json(rows)
@@ -37,14 +38,14 @@ export async function POST(request : NextRequest) {
         const [rows] : [any[], any] = await db.execute(query, [userId, TeamColor]);
         db.release();
         console.log("yes cap")
-    }else{
+    } else {
         console.log("not cap");
     }
 
     const query = "SELECT * from teams WHERE TeamColor = ?";
     const db = await pool.getConnection();
 
-    const [row] : [any[] , any] = await db.execute(query, [TeamColor])
+    const [row] : [any[], any] = await db.execute(query, [TeamColor])
 
     const serializedCookie = serialize('TeamColor', JSON.stringify(row), {
         httpOnly: true,
@@ -60,6 +61,7 @@ export async function POST(request : NextRequest) {
     response
         .headers
         .set('Set-Cookie', serializedCookie);
+    db.release();
 
     return response;
 

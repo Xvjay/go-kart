@@ -4,11 +4,25 @@ export async function GET() {
     try {
 
         const response = NextResponse.json({message: "Logout :)", success: true})
-        response.cookies.set("user", "", {
+        response
+            .cookies
+            .set("user", "", {
                 httpOnly: true,
                 expires: new Date(0)
             });
-            return response;
+        response
+            .cookies
+            .set("TeamColor", "", {
+                httpOnly: true,
+                expires: new Date(0)
+            });
+        response
+            .cookies
+            .set("SubTeamColor", "", {
+                httpOnly: true,
+                expires: new Date(0)
+            });
+        return response;
 
     } catch (error : any) {
         return NextResponse.json({
