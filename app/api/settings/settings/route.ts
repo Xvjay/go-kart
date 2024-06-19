@@ -10,6 +10,8 @@ export async function POST(req : NextRequest) {
     console.log(cookieValue);
 
     cookies().delete("TeamColor");
+    cookies().delete("SubTeamColor");
+
 
     return NextResponse.json({
         message: 'hello'

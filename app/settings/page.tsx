@@ -82,12 +82,12 @@ const Settings = () => {
 
                         <hr className='bg-stone-950	h-px border-0'></hr>
                         <br/>
-                        <div>Edit/Add Teams</div>
+                        <div>Add Teams</div>
 
                         <br/>
 
                         <Link href='/makeTeam'>
-                            <button id="button1" onClick={changeCol}>Edit/Add Team</button>
+                            <button id="button1" onClick={changeCol}>Edit/Add Main Team</button>
                         </Link>
 
                         <br/>

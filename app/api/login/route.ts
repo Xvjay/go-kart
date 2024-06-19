@@ -21,10 +21,10 @@ export async function POST(request : Request) {
             'am_users on users.Id = subteam_users.UserId left join team_subsets on subteam_us' +
             'ers.SubteamId = team_subsets.Child_TeamId left join teams on team_subsets.Parent' +
             '_TeamId = teams.TeamId where Email = ?'
-    const query4 = "SELECT Child_TeamId as TeamId, TeamColor, CaptainId , Parent_TeamId FROM users left" +
-            " join subteam_users on users.Id = subteam_users.UserId left join team_subsets on" +
-            " subteam_users.SubteamId = team_subsets.Child_TeamId left join teams on team_sub" +
-            "sets.Child_TeamId = teams.TeamId where Email = ?"
+    const query4 = "SELECT Child_TeamId as TeamId, TeamColor, CaptainId , Parent_TeamId FROM users l" +
+            "eft join subteam_users on users.Id = subteam_users.UserId left join team_subsets" +
+            " on subteam_users.SubteamId = team_subsets.Child_TeamId left join teams on team_" +
+            "subsets.Child_TeamId = teams.TeamId where Email = ?"
     const [rows2] : [any[], any] = await db.execute(query2, [Email, Password]);
     const [rows3] : [any[], any] = await db.execute(query3, [Email]);
     const [rows4] : [any[], any] = await db.execute(query4, [Email]);
@@ -41,6 +41,13 @@ export async function POST(request : Request) {
 
     db.release();
 
+    const serializedCookie2 = serialize('TeamColor', JSON.stringify(currTeam), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        path: '/'
+    });
+
     const serializedCookie = serialize('user', JSON.stringify(currUser), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -48,12 +55,6 @@ export async function POST(request : Request) {
         path: '/'
     });
 
-    const serializedCookie2 = serialize('TeamColor', JSON.stringify(currTeam), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/'
-    });
     const serializedCookie3 = serialize('SubTeamColor', JSON.stringify(currSubTeam), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -71,6 +72,7 @@ export async function POST(request : Request) {
     response
         .headers
         .append('Set-Cookie', serializedCookie2);
+
     response
         .headers
         .append('Set-Cookie', serializedCookie3);

@@ -42,8 +42,7 @@ useEffect(() => {
                 },
                 credentials: 'include' 
             });
-            const result = await res.json();
-            console.log(result.message);
+            console.log("lol");
         }
     };
 
