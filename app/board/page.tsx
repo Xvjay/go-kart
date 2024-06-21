@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from '../componets/navBar'
+import Link from 'next/link'
 
 const Board = () => {
     return (
@@ -15,8 +16,11 @@ const Board = () => {
                 </div>
 
             </div>
-            <div className='justify-self-end'>
-            <button>el</button>
+            <div className='flex mr-9 mb-7 justify-end'>
+                <Link href="/addPoints">
+                    <button id='button1'>
+                        ADD POINTS</button>
+                </Link>
 
             </div>
 
