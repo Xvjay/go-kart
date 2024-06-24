@@ -114,11 +114,7 @@ const addPoints = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex mr-9 mb-7 justify-end'>
-                <Link href="/">
-                    <button id='button1'>ADD POINTS</button>
-                </Link>
-            </div>
+            
         </div>
     );
 };
