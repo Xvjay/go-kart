@@ -49,7 +49,7 @@ export async function POST(request : Request) {
 
 
             }
-            if(Password == Password1 && Password != "" || Password1 != ""){
+            if(Password === Password1){
                 console.log("yes")
                 const query = 'INSERT INTO users (Name, Email, Password) VALUES (?, ?, ?)';
                 const [result] = await db.execute(query, [Name, Email, Password]);
