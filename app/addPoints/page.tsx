@@ -2,8 +2,10 @@
 
 import React, {useEffect, useState} from 'react';
 import NavBar from '../componets/navBar';
+
+import {redirect} from 'next/navigation';
+import {validateHeaderName} from 'http';
 import Link from 'next/link';
-import Script from 'next/script';
 
 interface ChildTeam {
     ChildTeamId : number;
@@ -20,8 +22,8 @@ interface ParentTeam {
 const addPoints = () => {
     const [teamMembers,
         setTeamMembers] = useState < ParentTeam[] > ([]);
-    const [curPoint,
-        setCurPoint] = useState('');
+    let [curPoint,
+        setCurPoint] = useState("");
 
     useEffect(() => {
         const fetchTeamColors = async() => {
@@ -66,18 +68,31 @@ const addPoints = () => {
         fetchTeamColors();
     }, []);
 
-    
     const change = async(childTeamId : any) => {
+
         const response = await fetch('/api/addPoints', {
             method: 'POST',
-            body: JSON.stringify({points: curPoint , color: childTeamId }),
+            body: JSON.stringify({points: curPoint, color: childTeamId}),
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-    };
 
+        });
+        const inputElement = document.getElementById('one')as HTMLInputElement;
+        if (inputElement) {
+            inputElement.value = "0";
+        }
+    }
 
+    const numk = () => {
+        setCurPoint("0")
+
+    }
+
+    const all = (event : any) => {
+        change(event)
+        numk()
+    }
 
     return (
         <div className='bg-blue-200 flex flex-col h-screen'>
@@ -98,12 +113,15 @@ const addPoints = () => {
                                                 <div key={childIndex} className="text-white ml-4">
                                                     {child.ChildTeamColor}
                                                     <input
+                                                        id='one'
                                                         className='text-black'
                                                         type='number'
+                                                        onFocus={e => e.target.value = ''}
                                                         placeholder='Add Points'
                                                         onChange={e => setCurPoint(e.target.value)}/>
-                                                    <button id='button1' onClick={ () => change(child.ChildTeamId)}>add</button>
+                                                    <button id='button1' onClick={() => all(child.ChildTeamId)}>add</button>
                                                     <br/>
+
                                                 </div>
                                             ))}
                                     </div>

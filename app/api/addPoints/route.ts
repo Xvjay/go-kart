@@ -22,7 +22,7 @@ export async function POST(request : Request){
     const [curPoints] : [any[], any[]] = await db.execute(query1 ,[color])
     const curPointss = curPoints.map(row => row.Points);
 
-    const totalPoint = curPointss[0] + parseInt(points
+    let totalPoint = curPointss[0] + parseInt(points
 )
 
      
@@ -31,6 +31,6 @@ export async function POST(request : Request){
 
 
     return NextResponse.json({
-        message: 'hello'
-    }, {status: 200});
+        message: 'sdfsdfsdfsdf'
+    }, {status: 201});
 }

@@ -3,12 +3,17 @@
 import {useState} from "react";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Home() {
     const [logEmail,
         setLogEmail] = useState('');
     const [logPassword,
         setLogPassword] = useState('');
+    const [responseMessage,
+        setResponseMessage] = useState("");
+    const [status,
+        setStatus] = useState(Number);
 
     const login = async() => {
         const res = await fetch("/api/login", {
@@ -18,6 +23,9 @@ export default function Home() {
                 'Content-Type': 'application/json'
             }
         });
+        const result = await res.json();
+        setStatus(res.status);
+        setResponseMessage(result.message);
     }
 
     return (
@@ -45,12 +53,23 @@ export default function Home() {
                     <br/>
 
                     <div className="flex space-x-2">
-                    
+
                         <p className="text-sm">Don't have an account?</p>
 
                         <Link href="/register">
                             <button className="underline italic font-semibold hover:text-white ">Register</button>
                         </Link>
+                       
+                       
+                    </div>
+                    
+                    <div className="flex-col"
+                        style={{
+                        color: status === 200
+                            ? redirect('/homepage')
+                            : 'red'
+                    }}>
+                        {responseMessage}
                     </div>
 
                 </div>

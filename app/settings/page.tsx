@@ -30,7 +30,7 @@ const Settings = () => {
 
     return (
 
-        <div className='bg-blue-200 flex flex-col h-screen'>
+        <div className='bg-blue-200 flex flex-col min-h-screen bg-auto'>
             <NavBar/>
             <div className='flex m-auto text-center '>
                 <div className=" bg-[#93c5fd] max-h-full rounded-lg">

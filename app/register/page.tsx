@@ -3,6 +3,8 @@ import React, {useState} from 'react'
 import RegisterButton from '../componets/buttons/registerButton'
 import BackButton from '../componets/buttons/backButton'
 import Link from 'next/link'
+import { redirect } from 'next/navigation';
+
 
 const register = () => {
     const [regUsername,
@@ -11,6 +13,12 @@ const register = () => {
         setRegEmail] = useState('');
     const [regPassword,
         setRegPassword] = useState('');
+    const [regPass,
+        setRegPass] = useState('');
+    const [responseMessage,
+        setResponseMessage] = useState("");
+    const [status,
+        setStatus] = useState(Number);
 
     const handleRegister = async() => {
         const response = await fetch('/api/users', {
@@ -20,8 +28,11 @@ const register = () => {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
 
+        });
+        const result = await response.json();
+        setStatus(response.status);
+        setResponseMessage(result.message);
     };
 
     return (
@@ -62,8 +73,24 @@ const register = () => {
                     </Link>
                     <br/>
                     <BackButton/>
+                    <br/>
+                    <br/>
+
+
+                    
+
                 </div>
+                
             </div>
+            <br></br>
+            <div
+                        style={{
+                        color: status === 200
+                            ? redirect('/')
+                            : 'red'
+                    }}>
+                        {responseMessage}
+                    </div>
 
         </div>
 
