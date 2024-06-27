@@ -5,8 +5,7 @@ import {NextRequest, NextResponse} from 'next/server';
 export async function GET() {
 
     const db = await pool.getConnection();
-    const query = 'select * from teams left join team_subsets on teams.TeamId = team_subsets.Parent' +
-            '_TeamId where teams.TeamId = Parent_TeamId;';
+    const query = 'SELECT DISTINCT teams.TeamId, teams.TeamColor FROM teams JOIN team_subsets ON teams.TeamId = team_subsets.Parent_TeamId;';
     const [rows] = await db.execute(query)
 
     return NextResponse.json(rows)

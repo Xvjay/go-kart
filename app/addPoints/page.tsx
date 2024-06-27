@@ -3,10 +3,6 @@
 import React, {useEffect, useState} from 'react';
 import NavBar from '../componets/navBar';
 
-import {redirect} from 'next/navigation';
-import {validateHeaderName} from 'http';
-import Link from 'next/link';
-
 interface ChildTeam {
     ChildTeamId : number;
     ChildTeamColor : string;
@@ -95,7 +91,7 @@ const addPoints = () => {
     }
 
     return (
-        <div className='bg-blue-200 flex flex-col h-screen'>
+        <div className='bg-blue-200 flex flex-col min-h-screen bg-auto' >
             <NavBar/>
             <div className='flex m-auto text-center'>
                 <div className="bg-[#93c5fd] max-h-full rounded-lg text-center p-1">
@@ -132,11 +128,7 @@ const addPoints = () => {
                     </div>
                 </div>
             </div>
-            <div className='flex mr-9 mb-7 justify-end'>
-                <Link href="/">
-                    <button id='button1'>ADD POINTS</button>
-                </Link>
-            </div>
+            
         </div>
     );
 };

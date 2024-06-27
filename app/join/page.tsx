@@ -59,7 +59,7 @@ const JoinTeam = () => {
                 <ul className='flex flex-row'>
                     {teamMembers.map((member, index) => (
                         <li
-                            key={index - 2}
+                            key={index }
                             className="p-4 bg-blue-700 m-2 rounded-lg"
                             onClick={() => handleClick(member.TeamColor)}>
 

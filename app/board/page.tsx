@@ -1,12 +1,14 @@
 "use client"
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../componets/navBar'
 import Link from 'next/link'
 
 const Board = () => {
 
+    
     const [teamMembers,
         setTeamMembers] = useState < any[] > ([]);
+   
 
     useEffect(() => {
         const fetchTeamColors = async() => {
@@ -26,30 +28,29 @@ const Board = () => {
             <NavBar/>
             <div className='flex m-auto text-center '>
                 <div className=" bg-[#93c5fd] max-h-full rounded-lg">
+                    LEADER BOARD
                     <div
                         className='bg-blue-200 flex flex-col justify-evenly p-1 m-6 rounded-lg max-h-min	'>
-                        <ul className='flex flex-col'>
-                            {teamMembers.map((member, index) => (
-                                <li key={index} className="p-4 bg-blue-700 m-2 rounded-lg">
+  <ul className='flex flex-col'>
+                    {teamMembers.map((member, index) => (
+                        <li
+                            key={index - 2}
+                            className="p-4 bg-blue-700 m-2 rounded-lg">
 
-                                    <button>
-                                        <Link href="/teams" className="text-white ">
-                                            
-                                              {member.TeamColor}
-                                              <hr/>
+                            <button>
+                                <Link href="/teams" className="text-white ">
+                                    {member.TeamColor}
+                                    <br/>
+                                    {member.points}
 
+                                </Link>
+                            </button>
 
-                                                {member.points}
-                                            
+                        </li>
 
-                                        </Link>
-                                    </button>
+                    ))}
 
-                                </li>
-
-                            ))}
-
-                        </ul>
+                </ul>
                         <br/>
                     </div>
                 </div>

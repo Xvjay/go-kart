@@ -1,10 +1,8 @@
 "use client"
 import React, {useState} from 'react'
-import RegisterButton from '../componets/buttons/registerButton'
 import BackButton from '../componets/buttons/backButton'
 import Link from 'next/link'
-import { redirect } from 'next/navigation';
-
+import { redirect } from 'next/navigation'
 
 const register = () => {
     const [regUsername,
@@ -16,15 +14,15 @@ const register = () => {
     const [regPass,
         setRegPass] = useState('');
     const [responseMessage,
-        setResponseMessage] = useState("");
+        setResponseMessage] = useState ("");
     const [status,
-        setStatus] = useState(Number);
+        setStatus] = useState (Number);
 
     const handleRegister = async() => {
         const response = await fetch('/api/users', {
 
             method: 'POST',
-            body: JSON.stringify({Name: regUsername, Email: regEmail, Password: regPassword}),
+            body: JSON.stringify({Name: regUsername, Email: regEmail, Password: regPassword, Password1: regPass}),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -33,11 +31,14 @@ const register = () => {
         const result = await response.json();
         setStatus(response.status);
         setResponseMessage(result.message);
+
+        
     };
 
     return (
 
         <div className="bg-blue-200 h-screen">
+
             <div id='center'>
                 <div id='div1'>
                     <div className='input'>
@@ -50,7 +51,7 @@ const register = () => {
                     <br/>
                     <div className='input'>
                         <input
-                            type='email'
+                            type='text'
                             name='Email'
                             placeholder='Enter Email'
                             onChange={e => setRegEmail(e.target.value)}></input>
@@ -65,19 +66,28 @@ const register = () => {
                     </ div>
                     <br/>
                     <div className='input'>
-                        <input type='password' placeholder='Re-Enter Password'></input>
+                        <input
+                            type='password'
+                            name='Password1'
+                            placeholder='Enter Password'
+                            onChange={e => setRegPass(e.target.value)}></input>
                     </ div><br/>
 
-                    <Link href="/">
+                    <Link href="">
                         <button id='button1' onClick={handleRegister}>register</button>
                     </Link>
                     <br/>
                     <BackButton/>
                     <br/>
-                    <br/>
 
-
-                    
+                    <div
+                        style={{
+                        color: status === 200
+                            ? 'green'
+                            : 'red'
+                    }}>
+                        {responseMessage}
+                    </div>
 
                 </div>
                 
