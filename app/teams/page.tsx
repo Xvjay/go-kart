@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../componets/navBar'
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 const SubTeam = () => {
   const [enabled,
@@ -12,6 +13,10 @@ const [teamMembers,
     setTeamMembers] = useState < any[] > ([]);
 const [selectedColor,
     setSelectedColor] = useState(null);
+    const [responseMessage,
+        setResponseMessage] = useState("");
+    const [status,
+        setStatus] = useState(Number);
 
 useEffect(() => {
     const fetchTeamColors = async() => {
@@ -27,9 +32,15 @@ useEffect(() => {
     fetchTeamColors();
 }, []);
 
+
+
 const handleClick = (color : any) => {
     setSelectedColor(color);
+
+
+ 
 };
+
 
 useEffect(() => {
     const saveColor = async() => {
@@ -42,8 +53,9 @@ useEffect(() => {
                 },
                 credentials: 'include' 
             });
-            console.log("lol");
-        }
+            const result = await res.json();
+            setStatus(res.status);
+            setResponseMessage(result.message);        }
     };
 
     saveColor();
@@ -54,7 +66,7 @@ useEffect(() => {
             <NavBar/>
 
             <div className="m-auto">
-            <ul className='flex flex-row'>
+            <ul className='flex flex-col text-center'>
                     {teamMembers.map((member, index) => (
                         <li
                             key={index}
@@ -66,10 +78,22 @@ useEffect(() => {
                                     {member.TeamColor}
                                 </Link>
                             </button>
-
+                            
+                           
                         </li>
+                        
 
                     ))}
+                    <br/>
+                    <div className="flex-col"
+                        style={{
+                        color: status === 200
+                            ? redirect('/homepage')
+                            : 'red'
+                    }}>
+                        {responseMessage}
+                    </div>                            
+
 
                 </ul>
 

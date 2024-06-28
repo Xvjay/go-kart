@@ -14,13 +14,13 @@ export async function POST(request : Request) {
         if(res2 == ""){
             return NextResponse.json({
                 message: "Enter an Email"
-            }, {status: 201});
+            }, {status: 400});
         }
        
 
         return NextResponse.json({
             message: "This Email has already been used"
-        }, {status: 201});
+        }, {status: 400});
 
     } catch {
         try{
@@ -33,19 +33,19 @@ export async function POST(request : Request) {
             if(res2 == ""){
                 return NextResponse.json({
                     message: "Enter a Username"
-                }, {status: 201});
+                }, {status: 400});
 
 
             }
             return NextResponse.json({
                 message: "This Username has already been used"
-            }, {status: 201});
+            }, {status: 400});
 
         }catch{
             console.log(Password1)
             console.log(Password)
             if(Password == "" || Password1 == ""){
-                return NextResponse.json({ message: "Please fill out both Passwords" }, { status: 201 });
+                return NextResponse.json({ message: "Please fill out both Passwords" }, { status: 400 });
 
 
             }
@@ -58,7 +58,7 @@ export async function POST(request : Request) {
 
             }else{
                 console.log("Paswords are not the same")               
-                 return NextResponse.json({ message: "Passwords are not the same" }, { status: 201 });
+                 return NextResponse.json({ message: "Passwords are not the same" }, { status: 400 });
 
             }
            

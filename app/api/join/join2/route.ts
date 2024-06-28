@@ -78,15 +78,22 @@ export async function POST(request : NextRequest) {
     });
 
     if (userId && userId2) {
-        const query = "INSERT INTO subteam_users (SubteamId , UserId) values (?, ?)"
+        try{
+              const query = "INSERT INTO subteam_users (SubteamId , UserId) values (?, ?)"
         const db = await pool.getConnection();
         const [row] : [any[], any] = await db.execute(query, [userId2, userId])
-
+        } catch{
+            return NextResponse.json({
+                message: "An error has happen"
+            }, {status: 201});
+        }
+      
+    
     }
 
     const response = NextResponse.json({
-        message: "User found"
-    }, {status: 201});
+        message: "You have been added to group"
+    }, {status: 200});
 
     response
         .headers

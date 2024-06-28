@@ -20,6 +20,8 @@ const NavBar = () => {
                     <Link href='/settings'>Settings</Link>
                     <Link href='/board'>LeaderBoard</Link>
 
+                    
+
                 </div>
             </div>
             <div className='flex items-center justify-end sm:hidden'>
@@ -44,17 +46,19 @@ const NavBar = () => {
                         <div className='px-5pt-5 pb-6'>
                             <div className='flex items-center justify-end'>
                                 <div className='mr-2'>
-                                    <PopoverButton className="rounded-md bg-white p-2">
+                                    <PopoverButton className="rounded-md bg-white p-2 ">
                                         <span className='sr-only'>Open Menu</span>
                                         <BackspaceIcon className='h-6 w-6' aria-hidden="false"/>
                                     </PopoverButton>
                                 </div>
                             </div>
-                            <div className='mt-4 p-3'>
-                                <nav className='grid gap-y-8'>
+                            <div className='mt-4 p-3 w-1'>
+                                <nav className='grid gap-y-8 '>
                                     <Link href='/homepage'>Home</Link>
                                     <Link href='/settings'>Settings</Link>
                                     <Link href='/board'>LeaderBoard</Link>
+                                    <LogoutButton/>
+
                                 </nav>
                             </div>
                         </div>

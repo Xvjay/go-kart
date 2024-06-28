@@ -56,11 +56,11 @@ const JoinTeam = () => {
             <NavBar/>
 
             <div className="m-auto">
-                <ul className='flex flex-row'>
+                <ul className='flex sm:flex-row flex-col text-center items-center	'>
                     {teamMembers.map((member, index) => (
                         <li
                             key={index }
-                            className="p-4 bg-blue-700 m-2 rounded-lg"
+                            className="p-4 bg-blue-700 m-2 rounded-lg w-3/6"
                             onClick={() => handleClick(member.TeamColor)}>
 
                             <button>
@@ -76,7 +76,7 @@ const JoinTeam = () => {
                 </ul>
                 <br/>
                 <div className='flex justify-evenly flex-row'>
-                    <p>are you goinog to be team capatin? </p> 
+                    <p>are you going to be team captain? </p> 
                     <Checkbox 
                         checked={enabled}
                         onChange={setEnabled}
