@@ -6,7 +6,12 @@ export async function GET(req: NextRequest) {
   let TeamColo = "";
   if (cookieValue) {
     const parsedCookie = JSON.parse(cookieValue);
-    TeamColo = parsedCookie.TeamColor;
+    if (Array.isArray(parsedCookie) && parsedCookie.length > 0) {
+      TeamColo = parsedCookie[0].TeamColor;
+      console.log("TeamColor:", TeamColo);
+    } else {
+      TeamColo = parsedCookie.TeamColor;
+    }
   }
   console.log("h" + TeamColo);
 
