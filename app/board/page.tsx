@@ -34,7 +34,7 @@ const Board = () => {
   <ul className='flex flex-col'>
                     {teamMembers.map((member, index) => (
                         <li
-                            key={index - 2}
+                            key={index}
                             className="p-4 bg-blue-700 m-2 rounded-lg">
 
                             <button>
